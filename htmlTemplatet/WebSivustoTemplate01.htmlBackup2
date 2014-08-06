@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  
+  <meta http-equiv="content-type" content="text/html;charset=ISO-8859-1"/>
+
+  <link rel="stylesheet" href="docs/tyylit2.css" type="text/css" title="Default" />
+  <link rel="stylesheet" href="css/blueimp-gallery.min.css">
+  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+  
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
+  
+  <title>Heijastus dev</title>
+  
+  
+  <script charset="ISO-8859-1">
+    function KuvalleUusiKuvaTeksti( AlkuperainenTeksti, KuvaTiedostoPolkuineen ){
+
+    var KuvaTekstiaPromptista=prompt("Kirjoita kuvateksti", AlkuperainenTeksti );
+
+    $.ajax({
+      type: "POST",
+      url: "AjaxToiminnot/PaivitaKuvanTekstit01.php",
+      data: {KuvaPolkuineen:KuvaTiedostoPolkuineen , KuvaTeksti:KuvaTekstiaPromptista }
+    }).done(function( result ) {
+      $("#PHPnPalaute").html( " Annoit kuvatekstiksi " + KuvaTekstiaPromptista + " phplta vastaus  " + result );
+    });
+  }
+  </script>  
+  
+  
+    <script charset="ISO-8859-1">
+      function AvaaLeijuvaKuvaSelite( KuvaTiedostoPolkuineen ) {
+          
+        $.ajax({
+        type: "POST",
+        url: "AjaxToiminnot/HaeKuvanTekstit01.php",
+        data: {KuvaPolkuineen:KuvaTiedostoPolkuineen }
+        }).done(function( result ) {
+          
+          var KuvaTekstiAjaxlta = document.createElement("textarea");
+          KuvaTekstiAjaxlta.innerHTML = result;
+          
+          $('p#KuvaTeksti').text( KuvaTekstiAjaxlta.value ) ;
+
+//          $( "#dialog" ).dialog( "option", "autoOpen", false );
+
+//          $( "#dialog" ).dialog( "option", "autoOpen", false );
+
+//          $( "#dialog" ).position({ my: "left+3 bottom-3", of: event,collision: "fit"});          
+
+//          $("#dialog").dialog({ position: {  my: "left+3 bottom-3", of: event, at : event } });
+
+//           $("#dialog").dialog({ position: {  my: "left+3 bottom-3", of: event, collision: "fit" } });
+//            $( "#dialog" ).position({ my: "left top", at: "left bottom", of : window}); 
+                     
+//            $("#dialog").dialog({ position: {  my: "left+5 bottom-3", of : event, collision: "fit"}});    
+//            $("#dialog").dialog();    
+//              $("#dialog").dialog({ position: { my: "left top", at: "left bottom", of: window } });
+
+
+          var $div = $('#IMG_0167JPG');
+
+// Open dialog (positioning won't work on hidden elements)
+           $("#dialog").dialog(); 
+
+// position newly opened dialog (using its parent container) below $div.
+          $("#dialog").dialog('widget').position({
+          my: "left top",
+          at: "left bottom",
+          of: $div
+          });
+ 
+        });
+        
+        
+      }
+      
+    </script>
+
+
+   <script>
+      function SuljeLeijuvaKuvaSelite() { 
+       $( "#dialog" ).dialog( "close" );  
+      }
+    </script>
+
+
+
+</head>
+<body>
+  
+   <div id="Kuva1">Tässä tekstiä divin sisällä</div>
+   <br><br><br>
+
+<div id="dialog" title="Kuvan tiedot">
+<p id=KuvaTeksti> </p>
+</div>
+
+
+
+
+<div id="PHPnPalaute"></div>
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
+
+
+<includeTAG=SivustonRunko>
+      
+
+
+<script src="js/blueimp-gallery.min.js">  </script>
+
+<!--   Lisätty allaolevaan     --> 
+<!--   fullScreen:true,     --> 
+  
+<script>
+document.getElementById('links').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event, fullScreen:true},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
+
+</script>
+
+</body>
+</html>

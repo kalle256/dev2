@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+
+  <link rel="stylesheet" href="docs/tyylit2.css" type="text/css" title="Default" />
+  <link rel="stylesheet" href="css/blueimp-gallery.min.css">
+  <link rel="stylesheet" href="css/contextMenu/jquery.contextMenu.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<!--  <link rel="stylesheet" href="css/prettify/prettify.sunburst.css" rel="stylesheet" type="text/css">   -->
+<!--  <link rel="stylesheet" href="css/contextMenu/screen.css" rel="stylesheet" type="text/css">      -->
+
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<!--  <script src="js/screen.js" type="text/javascript"></script>   -->
+<!--  <script src="js/prettify/prettify.js"></script>               -->
+  <script src="js/jquery.contextMenu.js"></script>      
+  
+  <title>Heijastus</title>
+  
+  <script charset="UTF-8">
+    
+    function HaeKuvanSelite( KuvaTiedostoPolkuineenX2 ){
+
+      var TempNULL = null;
+
+      $.ajax({ 
+      type: "POST",
+      datatype: "text",
+      async:false,
+      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+      url: "AjaxToiminnot/HaeKuvanTekstit01.php",
+      data: {KuvaPolkuineen:KuvaTiedostoPolkuineenX2, EiMerkistoMuunnos:TempNULL  }
+        }).done(function( result2 ) {
+          AlkuperainenKuvaTekstiXMLsta = result2;
+        });
+
+       AlkuperainenKuvaTekstiXMLsta = AlkuperainenKuvaTekstiXMLsta.trim();     
+     
+       return AlkuperainenKuvaTekstiXMLsta;
+    }         
+        
+    $(function(){
+      $.contextMenu({
+        selector: 'img',
+          callback: function (key, options) {
+            var m = "clicked: " + key;
+            if (key == "Malli1") 
+            {  
+              var m = "klikattu malli1 menuvalikossa : " + key + " tiedosto polkuineen -> " + $(this).attr('id');
+              window.console && console.log(m) || alert(m); 
+            }
+            if (key == "Kuvateksti") 
+            {  
+              KuvalleUusiKuvaTeksti($(this).attr('id'));
+            }
+          },
+          items: {
+            "Malli1"         : { name: "Malli1 menuvalikossa" },
+            "Kuvateksti" : { name: "Kirjoita kuvalle kuvateksti" },
+                }
+          });
+    });
+        
+        
+    $(document).ready(function(){
+      $('#KirjauduSisaanButton').click(function(){
+        
+        var Kayttaja=document.getElementById("KayttajaTunnus");
+  
+        var Salasana=document.getElementById("salasana");
+
+        $.post(
+          "http://www.heijastus.fi/index.php",
+          { KayttajaNimi: Kayttaja.value, Salasana: Salasana.value },
+          function(data) {
+/*              alert( data );      */
+              window.open("http://www.heijastus.fi/index.php", "_self");
+          }
+        );
+
+      $( "#KirjautumisDialog" ).dialog( "close" );                        
+      });
+    });
+
+    $(document).ready(function(){      
+      $( "#KirjautumisDialog" ).dialog({ autoOpen: false });
+      $( "#KirjautumisDialogPainike" ).click(function() {
+        $( "#KirjautumisDialog" ).dialog( "option", "minWidth", 500 );
+        $( "#KirjautumisDialog" ).dialog( "open" );
+      });
+    });
+
+        
+    function KuvalleUusiKuvaTeksti( KuvaTiedostoPolkuineenX1 ){
+
+      var KuvaTekstiPOSTtavaksi = null;
+      KuvaTekstiPOSTtavaksi = HaeKuvanSelite( KuvaTiedostoPolkuineenX1 );
+      KuvaTekstiPOSTtavaksi = KuvaTekstiPOSTtavaksi.trim(); 
+    
+      var KuvaTekstiaPromptistaY3 = prompt("Kirjoita kuvateksti", KuvaTekstiPOSTtavaksi );
+ 
+      $.ajax({
+        type: "POST",
+        url: "AjaxToiminnot/PaivitaKuvanTekstit01.php",
+        data: {KuvaPolkuineen:KuvaTiedostoPolkuineenX1, KuvaTeksti:KuvaTekstiaPromptistaY3}
+      }).done(function( result3 ) {
+        $("#PHPnPalaute").html( " Annoit kuvatekstiksi " + KuvaTekstiaPromptistaY3 + " phplta vastaus  " + result3 );
+      });
+    }
+
+</script>
+
+</head>
+<body>
+  
+<div id="dialog" title="Kuvan tiedot">
+<p id=KuvaTeksti> </p>
+</div>
+
+<div id="KirjautumisDialog" title="Syötä käyttäjätunnus ja salasana">
+        <fieldset>
+            <label for="name">Käyttäjätunnus</label><br>
+            <input type="text" id="KayttajaTunnus" class="text ui-widget-content ui-corner-all" /><br>
+            <label for="salasana">Salasana</label><br>
+            <input type="password" id="salasana" class="text ui-widget-content ui-corner-all" /><br>
+            <button id="KirjauduSisaanButton">Kirjaudu sisään</button><br>
+        </fieldset>
+</div>
+
+
+<div id="Sivusto">
+
+  <div id="ylaosa">
+
+    <div id="ylaosaLaatikko1"></div>
+
+    <div id="ylaosaLaatikko2Tayte"></div>
+
+    <div id="ylaosaLaatikko2Kuva"></div>
+
+    <div id="ylaosaLaatikko3"></div>
+
+  </div>
+  <div id="alaosa">
+
+    <div id="alaosaLaatikko1">
+    
+      <includeTAG=VasenNavigaatio>
+
+    </div>
+
+    <div id="alaosaLaatikko2"> 
+
+      <includeTAG=blue-imp-gallery-controls.html>
+      <includeTAG=SivustonRunko>
+      <includeTAG=blue-imp-gallery-JavaScripteja.html>
+  
+    </div>
+
+    <div id="alaosaLaatikko3"></div>
+
+  </div>
+  <div id="alaosaViiva"></div>    
+
+</div>
+
+
+<!--  Sisällytä tämä yhteystietoihin                                                                              -->
+<!--  <a href="http://fi.linkedin.com/in/kallekangasmaa">                                                         -->
+<!--            <img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_profile_greytxt_80x15.png"      -->
+<!--            width="80" height="15" border="0" alt="View kalle kangasmaa's profile on LinkedIn">               -->
+<!--  </a>                                                                                                        -->
+<!--                                                                                                              -->
+
+</body>
+</html>

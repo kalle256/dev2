@@ -1,0 +1,3 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^heijastus.fi
+RewriteRule ^(.*)$ http://www.heijastus.fi/$1 [R=permanent,L]

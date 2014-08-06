@@ -1,0 +1,143 @@
+
+a {
+	text-decoration: underline;
+	color: blue; background: transparent;
+}
+
+html, body {
+  margin:0px;
+
+ }
+ 
+/* DIVs */
+#Kuva1 {
+	background-color:#90bc90; 
+}
+
+#Sivusto {
+  width: 1024px; 
+	margin: 0 auto; 
+
+}
+
+/* Koko sivun leveys 820 px  */
+
+#ylaosa {
+
+}
+
+#ylaosaLaatikko1 {
+  padding-top:10px;
+  padding-left:10px;
+  float:left;
+  height:71px; 
+	width:150px;
+  background: #90bc90;    
+
+}
+
+#ylaosaLaatikko2Tayte {
+  float:left;
+  height:81px; 
+	width:140px;
+  background: #90bc90;    
+}
+
+#ylaosaLaatikko2Kuva {
+   float:left;  
+   background: #90bc90;      
+  
+   background-image:url('http://www.heijastus.fi/docs/heijastus_01.jpg');
+  
+   height:81px; 
+   width:520px;
+}
+
+#ylaosaLaatikko3 {
+  padding-top:10px;
+  padding-left:10px;
+  float:left;  
+  height:71px; 
+	width:190px;
+  background: #ffffff;    
+
+}
+
+
+#alaosa {
+
+  
+}
+
+#alaosaLaatikko1 {
+  
+  padding-top:10px;
+  padding-left:10px;
+  clear:both;
+  float:left;  
+  background: #ffffff;    
+	width:150px;  
+}
+
+#alaosaLaatikko2 {
+
+  border-left:thick double #e9e9e9;
+  border-right:1px solid #e9e9e9;  
+  padding-top:10px;
+  padding-left:10px;
+  padding-bottom:10px;  
+  float:left;  
+	width:800px;
+  background: #ffffff;    
+}
+
+#alaosaLaatikko3 {
+  padding-top:10px;
+  padding-left:10px;
+  float:left;  
+	width:100px;
+  background: #ffffff;    
+	width:50px;  
+}
+#alaosaViiva {
+  border-top:thick double #e9e9e9;  
+  clear:both;
+  float:left;  
+  height:10px;
+  background: #ffffff;    
+	width:1010px; 
+}
+
+
+/* http://css3button.net/  */
+button.css3button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	padding: 10px 20px;
+	background: -moz-linear-gradient(
+		top,
+		#a4d6a4 0%,
+		#6f9e31);
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#a4d6a4),
+		to(#6f9e31));
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px solid #134201;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.4),
+		0px 1px 0px rgba(255,255,255,0.3);
+}
+
