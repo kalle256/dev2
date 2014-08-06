@@ -1,0 +1,20 @@
+[05-Aug-2014 07:31:23 Europe/Helsinki] PHP Warning:  imagecreatefromjpeg(Tupasvilla20130726.JPG): failed to open stream: No such file or directory in /home/heijastu/public_html/dev2/apu/resize.php on line 13
+[05-Aug-2014 07:31:23 Europe/Helsinki] PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 14
+[05-Aug-2014 07:31:23 Europe/Helsinki] PHP Warning:  imagesx() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 15
+[05-Aug-2014 07:31:23 Europe/Helsinki] PHP Warning:  imagesx() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 17
+[05-Aug-2014 07:31:23 Europe/Helsinki] PHP Warning:  imagesy() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 18
+[05-Aug-2014 07:31:23 Europe/Helsinki] PHP Warning:  Division by zero in /home/heijastu/public_html/dev2/apu/resize.php on line 26
+[05-Aug-2014 07:31:23 Europe/Helsinki] PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in /home/heijastu/public_html/dev2/apu/resize.php on line 43
+[05-Aug-2014 07:31:23 Europe/Helsinki] PHP Warning:  imagecopyresized() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 44
+[05-Aug-2014 07:31:23 Europe/Helsinki] PHP Warning:  imagejpeg() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 72
+[05-Aug-2014 07:31:23 Europe/Helsinki] PHP Warning:  imagedestroy() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 75
+[05-Aug-2014 07:31:41 Europe/Helsinki] PHP Warning:  imagecreatefromjpeg(Tupasvilla20130726.JPG): failed to open stream: No such file or directory in /home/heijastu/public_html/dev2/apu/resize.php on line 13
+[05-Aug-2014 07:31:41 Europe/Helsinki] PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 14
+[05-Aug-2014 07:31:41 Europe/Helsinki] PHP Warning:  imagesx() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 15
+[05-Aug-2014 07:31:41 Europe/Helsinki] PHP Warning:  imagesx() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 17
+[05-Aug-2014 07:31:41 Europe/Helsinki] PHP Warning:  imagesy() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 18
+[05-Aug-2014 07:31:41 Europe/Helsinki] PHP Warning:  Division by zero in /home/heijastu/public_html/dev2/apu/resize.php on line 26
+[05-Aug-2014 07:31:41 Europe/Helsinki] PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in /home/heijastu/public_html/dev2/apu/resize.php on line 43
+[05-Aug-2014 07:31:41 Europe/Helsinki] PHP Warning:  imagecopyresized() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 44
+[05-Aug-2014 07:31:41 Europe/Helsinki] PHP Warning:  imagejpeg() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 72
+[05-Aug-2014 07:31:41 Europe/Helsinki] PHP Warning:  imagedestroy() expects parameter 1 to be resource, boolean given in /home/heijastu/public_html/dev2/apu/resize.php on line 75
