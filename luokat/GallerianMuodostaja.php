@@ -19,7 +19,11 @@
 
     public $KuvaHakemistonKuvaus;
 
-    public function __construct( $Hakemisto ) {
+    public function __construct( ) {
+        
+    }
+
+    private function AlustaKuvaHakemistonLukurutiinit ( $Hakemisto ) {
 
       $this->Hakemisto   = $Hakemisto;
 
@@ -40,8 +44,13 @@
         mkdir( $this->Hakemisto . "/CompressedFiles", 0777 );
         
     }
+      
+      
+
     
-    public function MuodostaKuvaGalleria() {
+    public function MuodostaKuvaGalleria( $Hakemisto ) {
+      
+      $this->AlustaKuvaHakemistonLukurutiinit ( $Hakemisto );
       
       system( "ls -A -1 $this->Hakemisto > $this->Hakemisto/KuvaTiedostoListaus.txt" );
 
@@ -75,13 +84,18 @@
             $this->MuodostettuKuvaGalleria .= "<a href=\"$URLEncPathToFile\"title=\"$KuvaTeksti\" data-gallery >\n" . 
                                               "<img id=\"$this->Hakemisto/$HakemistonTiedosto\" src=$this->URLEncPath/thumbs/$URLEnkHakemistonTiedosto>" . 
                                               "</a>\n\n" ;
+                                              
+                                              
           }  
         }
       }
     
-      return "<div id=\"links\">\n"   . 
+
+      return  "<div id=\"links\">\n"   . 
               $this->MuodostettuKuvaGalleria . 
-              "</div> \n";
+              "</div> \n" .
+              mb_convert_encoding (  "<br>Kuvia p‰‰set katselemaan klikkaamalla haluamaasi kuvaa.<br>" , "UTF-8") . 
+              mb_convert_encoding (  "Kuvien katselusta poistutaan klikkaamalla kuvan oikesta yl‰kulmasta X merkki‰" , "UTF-8");
 
     } 
     

@@ -8,6 +8,13 @@ html, body {
   margin:0px;
 
  }
+
+
+/* Saadaan aikaan sivun näyttäminen selaimelle vasta kun koko sivu on ladattu selaimelle  */
+body {
+    display: none;
+}
+ 
  
 /* DIVs */
 #Kuva1 {
@@ -47,7 +54,7 @@ html, body {
    float:left;  
    background: #90bc90;      
   
-   background-image:url('http://www.heijastus.fi/docs/heijastus_01.jpg');
+   background-image:url('http://www.heijastus.fi/css/heijastus_01.jpg');
   
    height:81px; 
    width:520px;
@@ -72,7 +79,7 @@ html, body {
 #alaosaLaatikko1 {
   
   padding-top:10px;
-  padding-left:10px;
+
   clear:both;
   float:left;  
   background: #ffffff;    
@@ -108,11 +115,38 @@ html, body {
 	width:1010px; 
 }
 
+#AikaleimaTunnisteetSivulleID {
+
+  text-align: center;
+  font-size: 75%;
+  color: #999;
+  clear:both;
+  float:left;  
+  background: #ffffff;    
+	width:1010px; 
+  height:33x; 	
+ 
+}
+
+#KirjautuneenKayttajanTiedot {
+
+  text-align: left;
+  font-size: 75%;
+  color: #999;
+  clear:both;
+  float:left;  
+  background: #ffffff;    
+ 
+}
+
+
 
 /* http://css3button.net/  */
+
 button.css3button {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	
 	color: #ffffff;
 	padding: 10px 20px;
 	background: -moz-linear-gradient(

@@ -1,12 +1,6 @@
 <?php
   session_start();
 
-  if ( isset( $_GET['NaytaKuvaHakemisto'] ))
-    $_SESSION['NaytaKuvaHakemisto'] = urldecode( $_GET['NaytaKuvaHakemisto'] );
-
-  if ( !$_SESSION['NaytaKuvaHakemisto'] )
-    $_SESSION['NaytaKuvaHakemisto'] = "kuvat/Raippaluoto";
-
   date_default_timezone_set('Europe/Helsinki');
 
   ini_set("display_errors", 1);
@@ -23,32 +17,37 @@
   
   $ApplicationData       = new ApplicationData();  
 
-  $KayttajanHallinta     = new KayttajaOikeuksienHallinta( );
+  $KayttajanHallinta     = new KayttajaOikeuksienHallinta( "../../KayttoOikeudet.xml" );
   
-  $HTMLRakentaja         = new SivustonMuodostaja( );
+  $HTMLRakentaja         = new SivustonMuodostaja();
 
-  $KuvaHakemistoLinkit   = new HakemistoLinkkienRakentaja( "kuvat" );
+  $KuvaHakemistoLinkit   = new HakemistoLinkkienRakentaja( "../kuvat" );
 
-  $PainikeToiminnot      = new PainikkeidenMuodostaja("");
+  $PainikeToiminnot      = new PainikkeidenMuodostaja();
 
-  $Galleriat             = new GallerianMuodostaja( $_SESSION['NaytaKuvaHakemisto'] ); 
-  
+  $Galleriat             = new GallerianMuodostaja( ); 
   
   $HTMLRakentaja->WebSivustoonVasenNavigaatio( $PainikeToiminnot->MuodostaPainikkeet() );
 
-  if ( !(isset( $_SESSION['SisaanKirjautunutKayttaja']) ) )
+
+  if ( $_SESSION['NaytettavaToiminneSivu'] == "Etusivu" ){
     $HTMLRakentaja->WebSivustonRunkoaUTF8( file_get_contents( "htmlTemplatet/EtusivuEiKirjautuneelleKayttajalle.html"));    
-  else {
+  }    
+  else if ( $_SESSION['NaytettavaToiminneSivu'] == "EsitaPyydettyKuvaGalleriaHakemisto" ){
     $HTMLRakentaja->KorvaaTag("blue-imp-gallery-controls.html");    
-    $HTMLRakentaja->WebSivustonRunkoa( $Galleriat->MuodostaKuvaGalleria() );
+    $HTMLRakentaja->WebSivustonRunkoa( $Galleriat->MuodostaKuvaGalleria( $_SESSION['NaytaKuvaHakemisto'] ) );
     $HTMLRakentaja->KorvaaTag("blue-imp-gallery-JavaScripteja.html");
-  }          
-
-  if ( isset($_SESSION['SisaanKirjautunutKayttaja']) )  
+  }
+  else if ( $_SESSION['NaytettavaToiminneSivu'] == "EsitaKuvaHakemistot" )
     $HTMLRakentaja->WebSivustonRunkoaUTF8( $KuvaHakemistoLinkit->MuodostaHakemistoLinkitHTML() );
+  else { 
+    $HTMLRakentaja->WebSivustonRunkoaUTF8( " VIRHE _SESSION['NaytettavaToiminneSivu'] käsittelyssä" );    
+  }  
 
-  file_put_contents("DEBUG-KuvaHakemistonKuvaus", $Galleriat->KuvaHakemistonKuvaus );
-
+  $HTMLRakentaja->AsetteleKayttajaKohtaisetKayttoliittymaToiminnot();
+  
+  $HTMLRakentaja->AsetteleFBkirjatumisToiminnot();  
+  
   $HTMLRakentaja->TulostaWebSivusto();
-
+  
 ?>

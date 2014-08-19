@@ -27,6 +27,8 @@
       
       global $ApplicationData;       
       
+      global $KayttajanHallinta;             
+      
       if ( is_dir( $this->KuvaHakemistotPolku ) ) {
         
         system( "ls -A -1 $this->KuvaHakemistotPolku > $this->KuvaHakemistotPolku/HakemistoListaus.txt" );
@@ -43,18 +45,22 @@
             
             $this->XMLTietojenKasittely->LataaKuvienXMLTiedot();
 
-            $HakemistonKuvausString = $this->XMLTietojenKasittely->NoudaHakemistonSelite();
+            $HakemistonKuvausString     = $this->XMLTietojenKasittely->NoudaHakemistonSelite();
+            
+            $HakemistonOikeusKuvausString = $this->XMLTietojenKasittely->NoudaHakemistonOikeudet();            
             
             if ( mb_convert_encoding ( $HakemistonKuvausString, "ISO-8859-1", "UTF-8" ) == "Tyhjä hakemistokuvaus vielä" )
               $HakemistonKuvausStringHTML =  $this->KuvaHakemistotPolku . " - " . $HakemistonHakemisto;
             else
-              $HakemistonKuvausStringHTML =  $HakemistonKuvausString;
+              $HakemistonKuvausStringHTML =  htmlentities($HakemistonKuvausString, ENT_QUOTES, "UTF-8");
                           
             $URLEnkoodattuPolku = urlencode( $this->KuvaHakemistotPolku . "/" . $HakemistonHakemisto );
-                
-            $this->HakemistoLinkitHTML .= "<tr><td>" . 
-                                          "<a href=\"?NaytaKuvaHakemisto=$URLEnkoodattuPolku  \"> $HakemistonKuvausStringHTML</a>" .
-                                          "</td></tr>\n";
+
+            if ( $KayttajanHallinta->SaakoHakemistonEsittaaKayttajalle( $HakemistonOikeusKuvausString )  ) {
+              $this->HakemistoLinkitHTML .= "<tr><td>" . 
+                                            "<a id=\"$this->KuvaHakemistotPolku/$HakemistonHakemisto\" href=\"?NaytaKuvaHakemisto=$URLEnkoodattuPolku  \"> $HakemistonKuvausStringHTML</a>" .
+                                            "</td></tr>\n";
+            }                                            
 
             $this->AsetaKuvaHakemistonTietoturva( $this->KuvaHakemistotPolku . "/" . $HakemistonHakemisto );
       

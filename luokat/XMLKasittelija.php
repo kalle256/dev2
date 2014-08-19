@@ -41,6 +41,19 @@
       $this->KuvienTiedotXML->load( $this->XMLKuvausTiedosto );
  
     }
+
+
+    public function NoudaHakemistonOikeudet() {
+
+      if ( isset ( $this->KuvienTiedotXML ) ) {
+        
+        $HakemistonOikeudet = $this->KuvienTiedotXML->getElementsByTagName('HakemistonTiedot') ;        
+        
+        return $HakemistonOikeudet->item(0)->getElementsByTagName('Oikeudet')->item(0)->nodeValue;
+      }                                     
+    }      
+
+
     
        
     public function NoudaHakemistonSelite() {
@@ -53,6 +66,26 @@
       }                                     
     }      
         
+    public function AsetaHakemistonSelite( $SeliteString ) {
+
+      if ( isset ( $this->KuvienTiedotXML ) ) {
+        
+        $this->KuvienTiedotXML->getElementsByTagName('HakemistonTiedot')->item(0)->getElementsByTagName('Kuvaus')->item(0)->nodeValue = $SeliteString;
+
+        $this->KuvienTiedotXML->save( $this->XMLKuvausTiedosto );
+      }                                     
+    }      
+
+    public function AsetaHakemistonOikeudet( $OikeudetString ) {
+
+      if ( isset ( $this->KuvienTiedotXML ) ) {
+        
+        $this->KuvienTiedotXML->getElementsByTagName('HakemistonTiedot')->item(0)->getElementsByTagName('Oikeudet')->item(0)->nodeValue = $OikeudetString;
+
+        $this->KuvienTiedotXML->save( $this->XMLKuvausTiedosto );
+      }                                     
+    }      
+
     
     public function NoudaKuvanSelite( $KuvaTiedosto ) {
       
@@ -130,21 +163,10 @@
 
       $xml_Dokumentti->appendChild( $xml_HakemistonTiedot );
       
-/**      
-      $KuvanTiedot = $xml->createElement("KuvanTiedot");
-      $KuvanTiedot->setAttribute('KuvaID', 'sam_1943.jpg');
-
-      $xml_KuvaTeksti = $xml->createElement("KuvaTeksti",  mb_convert_encoding("Kuva otettu 2013 Norrbyää", "UTF-8" ) );
-      $KuvanTiedot->appendChild( $xml_KuvaTeksti );
-
-      $xml_Dokumentti->appendChild( $KuvanTiedot );
-*/
-
       $xml->appendChild( $xml_Dokumentti );
-
 
       $xml->save( $this->XMLKuvausTiedosto );
     }
   }    
-    
-?>    
+  
+?>
