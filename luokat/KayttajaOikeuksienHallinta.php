@@ -17,10 +17,6 @@
       if ( isset ( $_POST['KayttajaNimi'] ) && isset ( $_POST['Salasana'] ) )
         $this->TarkastaKirjautuvaKayttaja();
 
-      if ( isset ( $_POST['FBKayttajaEtuNimi'] ) && isset ( $_POST['FBKayttajaSukuNimi'] ) && isset ( $_POST['FBKayttajaID'] ) )
-        $this->TarkastaFBnTunnistusPalvelunKauttaKirjautuvaKayttaja();
-
-
       if ( !is_file( $this->KayttajaOikeusTiedosto ) )
         $this->MuodostaSalasanatXMLTemplate();
         
@@ -33,31 +29,6 @@
       $ApplicationData->WriteStringToLog( $_SESSION['SisaanKirjautunutKayttaja'], "Session muuttujan lokitusta sisaankirjauduttaessa" );
       
     }
-    
-
-    private function TarkastaFBnTunnistusPalvelunKauttaKirjautuvaKayttaja( ) {
-
-      $KayttajanTiedot = $this->KuvausKayttajistaDOM->getElementsByTagName('KayttajanTiedot') ;  
-
-      $TempKayttajaNimi = "";
-        
-      foreach ($KayttajanTiedot as $YhdenKayttajanTiedot) {
-
-        if ( ( strtolower ($_POST['FBKayttajaEtuNimi'] )  == strtolower ( $YhdenKayttajanTiedot->getAttribute('FBKayttajaEtuNimi')) ) &&  
-               strtolower ($_POST['FBKayttajaSukuNimi'])  == strtolower ( $YhdenKayttajanTiedot->getAttribute('FBKayttajaSukuNimi')) ) {
-                
-          $_SESSION['SisaanKirjautunutKayttaja'] = $YhdenKayttajanTiedot->getAttribute('KayttajaNimi');
-          $TempKayttajaNimi = $YhdenKayttajanTiedot->getAttribute('KayttajaNimi');
-        }            
-      }
-      if (  $_SESSION['SisaanKirjautunutKayttaja'] != $TempKayttajaNimi ) {
-
-//        $ApplicationData->WriteUnsuccesfulLogInTOlog( $_SESSION['SisaanKirjautunutKayttaja'], "Session muuttujan lokitusta sisaankirjauduttaessa" );  
-        echo "--FBSISAANKIRJAUTUMINENEPAONNISTUI--";
-        exit();
-      }        
-    }
-
     
 
     private function LataaKayttoOikeudetDOM() {

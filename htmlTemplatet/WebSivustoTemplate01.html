@@ -15,7 +15,7 @@
   <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
   <script src="js/jquery.contextMenu.js"></script>      
   
-  <title>Heijastus kehitysversio</title>
+  <title>Heijastus</title>
   
   <script charset="UTF-8">
     
@@ -57,7 +57,6 @@
     }         
 
     <includeTAG=KayttajaKohtainenMenuToiminnallisuus>
-    <includeTAG=KayttajanSisaankirjausFBTunnuksilla>    
     
     $(document).ready(function(){
       $('#KirjauduSisaanButton').click(function(){
@@ -79,7 +78,7 @@
               NaytaSisaanKirjautuminenEpaonnistuiDialog();
             }              
             else {
-              window.open("http://heijastus.fi/keh/index.php", "_self");
+              window.open("http://heijastus.fi/index.php", "_self");
             }              
           }
         );
@@ -94,21 +93,16 @@
     }        
 
 
-/*  Tama suoritetaan kun selainikkuna suljetaan      */
-/*  Uloskirjaudutaan FB:stä kun sovellus suljetaan   */
-    window.onbeforeunload = LogoutFBaccount;
 
     $(document).ready(function(){
       $('#UlosKirjautumisPainike').click(function(){
-        
-        LogoutFBaccount();
         
         $.post(
           "http://www.heijastus.fi/keh/index.php",
           { KirjauduUlosSivustoilta: "NULL" },
           function(data) {
 /*          alert( data );      */
-            window.open("http://heijastus.fi/keh/index.php", "_self");
+            window.open("http://heijastus.fi/index.php", "_self");
           }
         );
       });
@@ -122,7 +116,7 @@
           { EsitaKuvaHakemistotPOST: "NULL" },
           function(data) {
 /*          alert( data );      */
-            window.open("http://heijastus.fi/keh/index.php", "_self");
+            window.open("http://heijastus.fi/index.php", "_self");
           }
         );
       });
@@ -214,7 +208,7 @@
           data: {HakemistonPolkuPOSTssa:HakemistoPolku, HakemistoTekstiPOSTssa:UusiHakemistoTekstiKayttajalta}
         }).done(function( result3 ) {
           $("#PHPnPalaute").html( " Annoit hakemistotekstiksi " + UusiHakemistoTekstiKayttajalta + " phplta vastaus  " + result3 );
-          window.open("http://heijastus.fi/keh/index.php", "_self");
+          window.open("http://heijastus.fi/index.php", "_self");
         });
       }        
     }
@@ -267,12 +261,6 @@
             <input type="password" id="salasana" class="text ui-widget-content ui-corner-all" /><br>
             <button  class="css3button" id="KirjauduSisaanButton">Kirjaudu</button><br>
             <hr>
-            Voit halutessasi kirjautua heijastus.fi palveluun tunnistautumalla Facebookin tunnistuspalveluun<br><br>
-            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
-            <br><br>
-            Facebookin kautta tapahtuva käyttäjäntunnistus suoritetaan 
-            <a href="http://en.wikipedia.org/wiki/OAuth" target="_blank">OAuth</a> 
-            standardin mukaisesti.
         </fieldset>
 </div>
 

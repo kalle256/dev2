@@ -1,16 +1,5 @@
 <?php
 
-require_once 'vendor/autoload.php';
- 
-use Facebook\FacebookSession;
-use Facebook\FacebookRedirectLoginHelper;
-use Facebook\FacebookRequest;
-use Facebook\FacebookResponse;
-use Facebook\FacebookSDKException;
-use Facebook\FacebookRequestException;
-use Facebook\FacebookAuthorizationException;
-use Facebook\GraphObject;
-
   class SivustonMuodostaja {
   
     private $SivustoTemplateTiedosto              = "htmlTemplatet/WebSivustoTemplate01.html";
@@ -93,52 +82,6 @@ use Facebook\GraphObject;
       
     }      
 
-    public function AsetteleFBkirjatumisLinkkiOLD() {
-
-      $helper = new FacebookRedirectLoginHelper('http://www.heijastus.fi/keh', $appId = '1448860825387536', $appSecret = 'c391394b4db8d5a600b5b8915e8bced5' );
-       
-      $HTMLStringSivustoon = mb_convert_encoding (  '<a href="' . $helper->getLoginUrl() . '">Kirjaudu sis‰‰n FB tunnuksin</a>' , "UTF-8");
-      $this->MuodostettavaWebSivu = str_replace( "<includeTAG=KayttajanSisaankirjausFBTunnuksilla>" , $HTMLStringSivustoon, $this->MuodostettavaWebSivu );
-      
-      file_put_contents("temp/FBdebug01A", "DATAA02\n", FILE_APPEND);                 
-      
-      try {
-        $session = $helper->getSessionFromRedirect();
-      } catch(FacebookRequestException $ex) {
-          // When Facebook returns an error
-                file_put_contents("temp/FBdebug01", "DATAA02\n", FILE_APPEND);           
-        } catch(\Exception $ex) {
-          // When validation fails or other local issues
-                file_put_contents("temp/FBdebug01", "DATAA03\n", FILE_APPEND);                     
-                file_put_contents("temp/FBdebug01", print_r( $ex, true ) . "DATAA03B\n", FILE_APPEND);                     
-        }
-     
-      // Tarkastetaan mik‰li on FB tunnistautuminen tehty
-      if ( isset( $session ) ) {
-        // graph api request for user data
-        $request = new FacebookRequest( $session, 'GET', '/me' );
-        $response = $request->execute();
-        // get response
-        $graphObject = $response->getGraphObject();
-         
-        file_put_contents("temp/FBdebug01", "DATAA04", FILE_APPEND);                              
-        
-        // print data
-        file_put_contents("temp/FBdebug02X", print_r( $graphObject, true ), FILE_APPEND );
-      }      
-      
-
-    }      
-
-
-    public function AsetteleFBkirjatumisToiminnot() {
-
-      $jsStringSivustoon = file_get_contents( "js/KayttajanSisaankirjausFBTunnuksilla.js" );
-      $jsStringSivustoon = mb_convert_encoding (  $jsStringSivustoon , "UTF-8");
-      $this->MuodostettavaWebSivu = str_replace( "<includeTAG=KayttajanSisaankirjausFBTunnuksilla>" , $jsStringSivustoon, $this->MuodostettavaWebSivu );
-      
-    }      
-
 
     private function KayttajaJaAikaleimaTunnisteetSivulle() {
       
@@ -185,7 +128,6 @@ use Facebook\GraphObject;
       $this->MuodostettuSivusto = str_replace( "<includeTAG=blue-imp-gallery-JavaScripteja.html>",        "", $this->MuodostettuSivusto );
       $this->MuodostettuSivusto = str_replace( "<includeTAG=SivustonRunko>",                              "", $this->MuodostettuSivusto );
       $this->MuodostettuSivusto = str_replace( "<includeTAG=KayttajaKohtainenMenuToiminnallisuus>",       "", $this->MuodostettuSivusto );      
-      $this->MuodostettuSivusto = str_replace( "<includeTAG=KayttajanSisaankirjausFBTunnuksilla>",        "", $this->MuodostettuSivusto );            
       $this->MuodostettuSivusto = str_replace( "<includeTAG=KirjautuneenKayttajanTiedot>",                "", $this->MuodostettuSivusto );                  
       
     }

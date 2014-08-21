@@ -46,8 +46,6 @@
 
   $HTMLRakentaja->AsetteleKayttajaKohtaisetKayttoliittymaToiminnot();
   
-  $HTMLRakentaja->AsetteleFBkirjatumisToiminnot();  
-  
   $HTMLRakentaja->TulostaWebSivusto();
   
 ?>
